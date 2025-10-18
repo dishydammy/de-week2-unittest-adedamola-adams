@@ -21,7 +21,13 @@ class ArtificialPancreasSystem:
     
     def deliver_insulin(self, dose: float):
       """Delivers the right dose of Insulin needed to bring glucose to the appropiate level."""
-      self.glucose_level -= dose * self.insulin_sensitivity
+      if self.insulin_sensitivity <= 0 or self.GLUCOSE_PER_CARB <=0:
+        raise ValueError('Sensitivity and Glucose_per_carb must be greater than 0')
+     
+      if self.glucose_level > self.target_glucose + self.tolerance:
+        self.glucose_level -= dose * self.insulin_sensitivity
+      else:
+        return "Glucose level is okay, no need for insulin"
 
     def recommend_action(self, auto_apply=False):
       """
