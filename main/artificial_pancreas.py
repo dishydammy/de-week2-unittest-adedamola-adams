@@ -13,10 +13,14 @@ class ArtificialPancreasSystem:
 
     def meal(self, carbs: float):
       """Simulate a meal event (input feature: carbs)."""
+      if carbs < 0:
+            raise ValueError("Carbs cannot be negative.")
       self.glucose_level += carbs * self.GLUCOSE_PER_CARB
 
     def exercise(self, duration: float):
       """Simulate physical activity (input feature: duration in minutes)."""
+      if duration < 0:
+        raise ValueError("Exercise duration cannot be negative.")
       self.glucose_level -= duration * self.GLUCOSE_BURN_PER_MIN
     
     def deliver_insulin(self, dose: float):
